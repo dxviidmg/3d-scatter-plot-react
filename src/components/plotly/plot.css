@@ -1,0 +1,6 @@
+.graph, #graph {
+	background-color: red;
+	color: blue;
+	width: 1000px;
+    border: 1px solid black;
+}
