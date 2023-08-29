@@ -1,130 +1,71 @@
-import React, { useEffect } from 'react';
-import Plotly from 'plotly.js-dist';
-import './plot.css'
+import React, { useEffect } from "react";
+import Plotly from "plotly.js-dist";
+import "./plot.css";
 
+function Scatter3DPlot({ points_inside, points_outside }) {
+  useEffect(() => {
+    // Your Plotly code here
+    const graphDiv = document.getElementById("graph");
 
-function Scatter3DPlot() {
-    useEffect(() => {
-      // Your Plotly code here
-      const graphDiv = document.getElementById('graph');
-  
-      const trace = {
-        // Your trace properties here
-      };
-  
+    const trace = {
+      // Your trace properties here
+    };
 
-      const data = [{
-        marker: {
-            showscale: true,
-            colorbar: {
-                x: 0
-            },
-            size: [28.666666666666668, 20.666666666666668, 15.333333333333334, 		17.666666666666668, 19.0, 17.666666666666668, 26.0, 21.0, 21.666666666666668, 27.0, 21.666666666666668, 16.666666666666668, 27.0, 14.0, 29.666666666666668, 22.0, 16.0, 28.0, 27.0, 25.333333333333332],
-           cmax: 14, 
-           cmin: 20,
-            color: [28.666666666666668, 20.666666666666668, 15.333333333333334, 		17.666666666666668, 19.0, 17.666666666666668, 26.0, 21.0, 21.666666666666668, 27.0, 21.666666666666668, 16.666666666666668, 27.0, 14.0, 29.666666666666668, 22.0, 16.0, 28.0, 27.0, 25.333333333333332],
-            colorscale: 'Viridis'
-        },
+    const data = [
+
+      {
         mode: "markers",
-        x: [630, 310, 260, 566, 566, 400, 515, 630, 151, 400, 515, 176, 230, 260, 151, 648, 648, 176, 230, 310], 
-        y: [200, 100, 200, 100, 200, 100, 100, 100, 200, 200, 200, 200.1234, 200, 100, 100, 200, 100, 100, 100, 200], 
-        z: [495, 18, 104, 33, 33, 615, 10, 495, 420, 615, 10, 232, 515, 104, 420, 327, 327, 232, 515, 18],
-        text: [
-            "vav-01-01",
-            "vav-01-02",
-            "vav-01-03",
-            "vav-01-04",
-            "vav-01-05",
-            "vav-01-06",
-            "vav-01-07",
-            "vav-01-08",
-            "vav-01-09",
-            "vav-01-10",
-            "vav-02-01",
-            "vav-02-02",
-            "vav-02-03",
-            "vav-02-04",
-            "vav-02-05",
-            "vav-02-06",
-            "vav-02-07",
-            "vav-02-08",
-            "vav-02-09",
-            "vav-02-10",
-        ],
+        x: { points_outside }.points_outside.x,
+        y: { points_outside }.points_outside.y,
+        z: { points_outside }.points_outside.z,
         hoverinfo: "name+text",
         type: "scatter3d",
-        name: "Floor 1",
+        name: "points_outside",
         showlegend: true,
-        showscale: true
-    }]
+        showscale: true,
+        marker: {
+          size: 5,
+          line: {
+            color: "blue",
+          },
+        },
+      },
 
-  
-      const layout = {
+      {
+        mode: "markers",
+        x: { points_inside }.points_inside.x,
+        y: { points_inside }.points_inside.y,
+        z: { points_inside }.points_inside.z,
+        hoverinfo: "name+text",
+        type: "scatter3d",
+        name: "points_inside",
         showlegend: true,
-		showscale: true
-      };
-  
-      Plotly.newPlot(graphDiv, data, layout);
-    }, []);
-  
-    return <div id="graph" style={{backgroundColor: "red"}}/>;
-  }
-  
-  export default Scatter3DPlot;
+        showscale: true,
+        marker: {
+          size: 5,
+          line: {
+            color: "red",
+          },
+        },
+      },
 
+      
 
-/*
+    ];
 
-Plotly.plot('graph', {
-	data:[{
-	marker: {
-		showscale: true,
-		colorbar: {
-			x: 0
-		},
-		size: [28.666666666666668, 20.666666666666668, 15.333333333333334, 		17.666666666666668, 19.0, 17.666666666666668, 26.0, 21.0, 21.666666666666668, 27.0, 21.666666666666668, 16.666666666666668, 27.0, 14.0, 29.666666666666668, 22.0, 16.0, 28.0, 27.0, 25.333333333333332],
-	   cmax: 14, 
-   	cmin: 20,
-		color: [28.666666666666668, 20.666666666666668, 15.333333333333334, 		17.666666666666668, 19.0, 17.666666666666668, 26.0, 21.0, 21.666666666666668, 27.0, 21.666666666666668, 16.666666666666668, 27.0, 14.0, 29.666666666666668, 22.0, 16.0, 28.0, 27.0, 25.333333333333332],
-		colorscale: 'Viridis'
-	},
-	mode: "markers",
-	x: [630, 310, 260, 566, 566, 400, 515, 630, 151, 400, 515, 176, 230, 260, 151, 648, 648, 176, 230, 310], 
-	y: [200, 100, 200, 100, 200, 100, 100, 100, 200, 200, 200, 200.1234, 200, 100, 100, 200, 100, 100, 100, 200], 
-	z: [495, 18, 104, 33, 33, 615, 10, 495, 420, 615, 10, 232, 515, 104, 420, 327, 327, 232, 515, 18],
-	text: [
-		"vav-01-01",
-		"vav-01-02",
-		"vav-01-03",
-		"vav-01-04",
-		"vav-01-05",
-		"vav-01-06",
-		"vav-01-07",
-		"vav-01-08",
-		"vav-01-09",
-		"vav-01-10",
-		"vav-02-01",
-		"vav-02-02",
-		"vav-02-03",
-		"vav-02-04",
-		"vav-02-05",
-		"vav-02-06",
-		"vav-02-07",
-		"vav-02-08",
-		"vav-02-09",
-		"vav-02-10",
-	],
-	hoverinfo: "name+text",
-	type: "scatter3d",
-	name: "Floor 1",
-	showlegend: true,
-	showscale: true
-}],
-	layout: {
-		showlegend: true,
-		showscale: true
-	}
-});
+    const layout = {
+      scene: {
+        xaxis: { title: 'Variable 1' },
+        yaxis: { title: 'Variable 2' },
+        zaxis: { title: 'Variable 3' }
+      }
+    };
 
+    console.log({ points_inside }.points_inside);
+    Plotly.newPlot(graphDiv, data, layout);
+  }, []);
 
-*/
+  return <div id="graph" style={{ backgroundColor: "red" }} />;
+}
+
+export default Scatter3DPlot;
