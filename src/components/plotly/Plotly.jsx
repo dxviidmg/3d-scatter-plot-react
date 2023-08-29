@@ -4,20 +4,14 @@ import "./plot.css";
 
 function Scatter3DPlot({ points_inside, points_outside }) {
   useEffect(() => {
-    // Your Plotly code here
     const graphDiv = document.getElementById("graph");
 
-    const trace = {
-      // Your trace properties here
-    };
-
     const data = [
-
       {
         mode: "markers",
-        x: { points_outside }.points_outside.x,
-        y: { points_outside }.points_outside.y,
-        z: { points_outside }.points_outside.z,
+        x: points_outside.x,
+        y: points_outside.y,
+        z: points_outside.z,
         hoverinfo: "name+text",
         type: "scatter3d",
         name: "points_outside",
@@ -30,12 +24,11 @@ function Scatter3DPlot({ points_inside, points_outside }) {
           },
         },
       },
-
       {
         mode: "markers",
-        x: { points_inside }.points_inside.x,
-        y: { points_inside }.points_inside.y,
-        z: { points_inside }.points_inside.z,
+        x: points_inside.x,
+        y: points_inside.y,
+        z: points_inside.z,
         hoverinfo: "name+text",
         type: "scatter3d",
         name: "points_inside",
@@ -48,9 +41,6 @@ function Scatter3DPlot({ points_inside, points_outside }) {
           },
         },
       },
-
-      
-
     ];
 
     const layout = {
@@ -61,9 +51,8 @@ function Scatter3DPlot({ points_inside, points_outside }) {
       }
     };
 
-    console.log({ points_inside }.points_inside);
     Plotly.newPlot(graphDiv, data, layout);
-  }, []);
+  }, [points_inside, points_outside]);
 
   return <div id="graph" style={{ backgroundColor: "red" }} />;
 }
